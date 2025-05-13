@@ -8,6 +8,9 @@ from langchain.prompts import PromptTemplate
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.memory import ConversationBufferMemory
 from langchain.chains import ConversationalRetrievalChain
+from dotenv import load_dotenv
+
+load_dotenv()
 
 app = Flask(__name__)
 
