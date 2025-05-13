@@ -1,0 +1,11 @@
+gradio
+Flask
+langchain
+langchain-google-genai
+langchain-community
+PyPDF2
+faiss-cpu
+google-generativeai
+tiktoken
+python-dotenv
+
