@@ -10,6 +10,11 @@ A Flask-based API to register/login users, upload PDFs, run conversational PDF-b
 http://localhost:5000
 ```
 
+**Deployed URL:**
+```
+https://rag-api-c2vm.onrender.com
+```
+
 ---
 
 ## 🔐 1. Register User
@@ -27,7 +32,7 @@ http://localhost:5000
 
 ### cURL
 ```bash
-curl -X POST http://localhost:5000/register \
+curl -X POST https://rag-api-c2vm.onrender.com/register \
   -H "Content-Type: application/json" \
   -d '{"username": "testuser", "password": "testpass"}'
 ```
@@ -49,7 +54,7 @@ curl -X POST http://localhost:5000/register \
 
 ### cURL
 ```bash
-curl -X POST http://localhost:5000/login \
+curl -X POST https://rag-api-c2vm.onrender.com/login \
   -H "Content-Type: application/json" \
   -d '{"username": "testuser", "password": "testpass"}'
 ```
@@ -58,7 +63,7 @@ curl -X POST http://localhost:5000/login \
 
 ## 📄 3. Upload PDFs
 
-**Endpoint:** `POST /upload`  
+**Endpoint:** `POST /upload_pdfs`  
 **Description:** Upload one or more PDF files and initialize a chat session.
 
 ### Form Data
@@ -70,7 +75,7 @@ curl -X POST http://localhost:5000/login \
 
 ### cURL
 ```bash
-curl -X POST http://localhost:5000/upload \
+curl -X POST https://rag-api-c2vm.onrender.com/upload_pdfs \
   -F "username=testuser" \
   -F "session_id=session_xyz" \
   -F "pdfs=@/path/to/file1.pdf" \
@@ -94,26 +99,48 @@ curl -X POST http://localhost:5000/upload \
 
 ### cURL
 ```bash
-curl -X POST http://localhost:5000/chat \
+curl -X POST https://rag-api-c2vm.onrender.com/chat \
   -H "Content-Type: application/json" \
   -d '{"session_id": "session_xyz", "message": "What is this document about?"}'
 ```
 
 ---
 
-## 📜 5. Get Chat History
+## ➕ 6. Submit Session ID
 
-**Endpoint:** `GET /history/<session_id>`  
-**Description:** Fetch chat history for a session.
+**Endpoint:** `POST /submit_id`  
+**Description:** Link a session ID to a specific user.
 
-### Example
-```
-GET /history/session_xyz
+### Request
+```json
+{
+  "username": "testuser",
+  "session_id": "session_xyz"
+}
 ```
 
 ### cURL
 ```bash
-curl http://localhost:5000/history/session_xyz
+curl -X POST https://rag-api-c2vm.onrender.com/submit_id \
+  -H "Content-Type: application/json" \
+  -d '{"username": "testuser", "session_id": "session_xyz"}'
+```
+
+---
+
+## 📜 6. Get Chat History
+
+**Endpoint:** `GET /chat_history/<session_id>`  
+**Description:** Fetch chat history for a session.
+
+### Example
+```
+GET /chat_history/session_xyz
+```
+
+### cURL
+```bash
+curl https://rag-api-c2vm.onrender.com/chat_history/session_xyz
 ```
 
 ---
